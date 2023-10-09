@@ -1,0 +1,86 @@
+<div class="container">
+    <div *ngIf="car$ | async as car; else loadingBlock" class="card mb-3">
+        <div class="row g-0">
+            <div class="col-sm-12 col-md-5 p-4">
+                <img [src]="baseUrl + car.properties.image[0].url" class="card-img-top" alt="Car image" />
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <h5 class="card-title">{{ car.name }}</h5>
+                        </div>
+                        <div *ngIf="car.properties.discount > 0; else withoutDiscount" class="row">
+                            <div class="col">
+                                <h5 class="text-danger text-decoration-line-through">
+                                    {{ car.properties.price.toLocaleString('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD'
+                                    }) }}
+                                </h5>
+                                <h5 class="text-success">
+                                    {{ priceWithDiscount(car.properties.price,
+                                    car.properties.discount).toLocaleString('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD'
+                                    }) }}
+                                </h5>
+                            </div>
+                        </div>
+                        <ng-template #withoutDiscount>
+                            <div class="row">
+                                <h5 class="text-success">{{ car.properties.price.toLocaleString('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD'
+                                    }) }}</h5>
+                            </div>
+                        </ng-template>
+                        <div class="row">
+                            <div class="col-1">
+                                <img *ngIf="settings$ | async as settings" [src]="baseUrl + settings.fuelIcon[0].url"
+                                    class="rounded float-start" alt="Fuel Icon" style="width:20px;height:20px" />
+                            </div>
+                            <div class="col">
+                                <span class="text-body-secondary">{{ car.properties.fuel }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <img *ngIf="settings$ | async as settings"
+                                    [src]="baseUrl + settings.transmissionIcon[0].url" class="rounded float-start"
+                                    alt="Transmission Icon" style="width:20px;height:20px" />
+                            </div>
+                            <div class="col">
+                                <span class="text-body-secondary">{{ car.properties.transmission }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <img *ngIf="settings$ | async as settings" [src]="baseUrl + settings.locationIcon[0].url"
+                                    class="rounded float-start" alt="Location Icon" style="width:20px;height:20px" />
+                            </div>
+                            <div class="col">
+                                <span class="text-body-secondary">{{ car.properties.location }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div [innerHTML]="car.properties.description.markup" class="card-text mt-4"></div>
+                    <div class="row">
+                        <div class="col">
+                            <a (click)="goBack()" type="button" class="btn btn-outline-secondary me-2">
+                                goBack</a>
+                            <a class="btn btn-outline-secondary me-2">Buy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #loadingBlock>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>

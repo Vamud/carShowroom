@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-2 p-4">
+            <h5>searchBarTitle</h5>
+            <form *ngIf="filterOptions | async as filterOptions" [formGroup]="filterForm" class="pt-4"
+                (change)="applyFilters()">
+                <label for="brand-select">brandsTitle</label>
+                <div class="row">
+                    <select id="brand-select" formControlName="brand" class="form-select">
+                        <option *ngFor="let brand of filterOptions.brandOptions" [value]="brand.id">
+                            {{ brand.name }}
+                        </option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-10">
+            <ng-container *ngIf="filterOptions | async as filterOptions">
+                <app-pagination *ngIf="totalPages > 1" [currentPage]="currentPage"
+                    [totalPages]="totalPages" (pageChanged)="pageChanged($event)"></app-pagination>
+            </ng-container>
+            <div *ngIf="cars$ | async as cars; else loadingBlock" class="row row-cols-1 row-cols-md-3 g-4">
+                <div *ngFor="let car of cars" class="col-md-6 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <a [routerLink]="['/cars', car.id]">
+                            <img [src]="baseUrl + car.imageUrl" class="card-img-top img-thumbnail" alt="Car image" />
+                        </a>
+                        <div class="card-body">
+                            <a [routerLink]="['/cars', car.id]"
+                                class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover">
+                                <h5 class="card-title">
+                                    {{ car.name + " " + car.launchDate.slice(0, 4) }}
+                                </h5>
+                            </a>
+                            <div class="row">
+                                <div class="col-1">
+                                    <img *ngIf="settings$ | async as settings"
+                                        [src]="baseUrl + settings.fuelIcon[0].url" class="rounded float-start"
+                                        alt="Fuel Icon" style="width: 20px; height: 20px" />
+                                </div>
+                                <div class="col">
+                                    <span class="text-body-secondary">{{ car.fuel }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-1">
+                                    <img *ngIf="settings$ | async as settings"
+                                        [src]="baseUrl + settings.transmissionIcon[0].url" class="rounded float-start"
+                                        alt="Transmission Icon" style="width: 20px; height: 20px" />
+                                </div>
+                                <div class="col">
+                                    <span class="text-body-secondary">{{
+                                        car.transmission
+                                        }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-1">
+                                    <img *ngIf="settings$ | async as settings"
+                                        [src]="baseUrl + settings.locationIcon[0].url" class="rounded float-start"
+                                        alt="Location Icon" style="width: 20px; height: 20px" />
+                                </div>
+                                <div class="col">
+                                    <span class="text-body-secondary">{{ car.location }}</span>
+                                </div>
+                            </div>
+                            <div *ngIf="car.discount > 0; else elsePriceBlock" class="row">
+                                <div class="col text-success">
+                                    <h5 class="text-danger text-decoration-line-through">
+                                        {{
+                                        car.price.toLocaleString("en-US", {
+                                        style: "currency",
+                                        currency: "USD"
+                                        })
+                                        }}
+                                    </h5>
+                                </div>
+                                <div class="col text-success">
+                                    <h5>
+                                        {{
+                                        priceWithDiscount(car.price, car.discount).toLocaleString(
+                                        "en-US",
+                                        {
+                                        style: "currency",
+                                        currency: "USD"
+                                        }
+                                        )
+                                        }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <ng-template #elsePriceBlock>
+                                <div class="row">
+                                    <h5 class="text-success">
+                                        {{
+                                        car.price.toLocaleString("en-US", {
+                                        style: "currency",
+                                        currency: "USD"
+                                        })
+                                        }}
+                                    </h5>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #loadingBlock>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-container *ngIf="filterOptions | async as filterOptions">
+                <app-pagination *ngIf="filterOptions.totalPages > 1" [currentPage]="currentPage"
+                    [totalPages]="filterOptions.totalPages" (pageChanged)="pageChanged($event)"></app-pagination>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
