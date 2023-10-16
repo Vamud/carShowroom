@@ -3,11 +3,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { map, Observable, BehaviorSubject, tap, combineLatest, switchMap, startWith } from 'rxjs';
 
 import { SettingsNode } from 'src/app/core/models/settings.model';
-import { BASE_URL } from 'src/environments/environment';
 import { CarModel, FilterOptions } from 'src/app/features/cars/cars.model';
 import { CarsService } from 'src/app/features/cars/cars.service';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { LanguageService } from 'src/app/core/services/language.service';
+import { EnvironmentService } from 'src/app/core/services/environment.service';
 
 @Component({
   selector: 'app-car-list',
@@ -15,7 +15,7 @@ import { LanguageService } from 'src/app/core/services/language.service';
   styleUrls: ['./car-list.component.css'],
 })
 export class CarListComponent {
-  baseUrl = BASE_URL;
+  baseApiUrl: string;
 
   cars$!: Observable<CarModel[]>;
 
@@ -26,7 +26,7 @@ export class CarListComponent {
   filterForm = new FormGroup({
     brand: new FormControl<string | null | undefined>(null),
     minPrice: new FormControl<string | null | undefined>(null),
-    maxPrice: new FormControl<string | null | undefined>(null)
+    maxPrice: new FormControl<string | null | undefined>(null),
   });
   settings$ = this.backendService
     .fetchSettings()
@@ -37,8 +37,11 @@ export class CarListComponent {
     private backendService: BackendService,
     private carsService: CarsService,
     private renderer: Renderer2,
-    private languageService: LanguageService
-  ) {}
+    private languageService: LanguageService,
+    private environmentService: EnvironmentService
+  ) {
+    this.baseApiUrl = this.environmentService.getValue('baseApiUrl');
+  }
 
   clearFilters(): void {
     this.filterForm.reset();
@@ -73,12 +76,14 @@ export class CarListComponent {
       ),
     ]).pipe(
       switchMap(([page, brand, minPrice, maxPrice]) => {
-        return this.carsService.fetchCars(page, brand!, minPrice!, maxPrice!).pipe(
-          tap((data) => {
-            this.totalPages$.next(data.totalPages);
-          }),
-          map((data) => data.carModels)
-        );
+        return this.carsService
+          .fetchCars(page, brand!, minPrice!, maxPrice!)
+          .pipe(
+            tap((data) => {
+              this.totalPages$.next(data.totalPages);
+            }),
+            map((data) => data.carModels)
+          );
       })
     );
   }

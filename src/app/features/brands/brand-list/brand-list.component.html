@@ -3,7 +3,7 @@
         <div *ngFor="let brand of brands" class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-3 p-3">
-                    <img [src]="baseUrl + brand.properties.icon[0].url" class="img-fluid rounded-start"
+                    <img [src]="baseApiUrl + brand.properties.icon[0].url" class="img-fluid rounded-start"
                         alt="Car brand logo" style="width:200px;height:200px">
                 </div>
                 <div class="col-md-9">
@@ -14,7 +14,7 @@
                         <div [innerHTML]="brand.properties.description.markup" class="card-text"></div>
                         <div class="row">
                             <div class="col-1">
-                                <img *ngIf="settings" [src]="baseUrl + settings.originCountryIcon[0].url" class="rounded float-start"
+                                <img *ngIf="settings" [src]="baseApiUrl + settings.originCountryIcon[0].url" class="rounded float-start"
                                     alt="Origin Country Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="row">
                             <div class="col-1">
-                                <img *ngIf="settings" [src]="baseUrl + settings.dateIcon[0].url" class="rounded float-start"
+                                <img *ngIf="settings" [src]="baseApiUrl + settings.dateIcon[0].url" class="rounded float-start"
                                     alt="Origin Country Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">

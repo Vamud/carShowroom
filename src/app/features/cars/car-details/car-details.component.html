@@ -2,7 +2,7 @@
     <div *ngIf="car$ | async as car; else loadingBlock" class="card mb-3">
         <div class="row g-0">
             <div class="col-sm-12 col-md-5 p-4">
-                <img [src]="baseUrl + car.properties.image[0].url" class="card-img-top" alt="Car image" />
+                <img [src]="baseApiUrl + car.properties.image[0].url" class="card-img-top" alt="Car image" />
             </div>
             <div class="col-md-7">
                 <div class="card-body">
@@ -27,7 +27,7 @@
                         </ng-template>
                         <div class="row">
                             <div class="col-1">
-                                <img *ngIf="settings$ | async as settings" [src]="baseUrl + settings.fuelIcon[0].url"
+                                <img *ngIf="settings$ | async as settings" [src]="baseApiUrl + settings.fuelIcon[0].url"
                                     class="rounded float-start" alt="Fuel Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">
@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-1">
                                 <img *ngIf="settings$ | async as settings"
-                                    [src]="baseUrl + settings.transmissionIcon[0].url" class="rounded float-start"
+                                    [src]="baseApiUrl + settings.transmissionIcon[0].url" class="rounded float-start"
                                     alt="Transmission Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="row">
                             <div class="col-1">
-                                <img *ngIf="settings$ | async as settings" [src]="baseUrl + settings.locationIcon[0].url"
+                                <img *ngIf="settings$ | async as settings" [src]="baseApiUrl + settings.locationIcon[0].url"
                                     class="rounded float-start" alt="Location Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">

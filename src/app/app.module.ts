@@ -12,13 +12,15 @@ import { CarsModule } from './features/cars/cars.module';
 import { BrandsModule } from './features/brands/brands.module';
 import { BreadcrumbsComponent } from './core/layout/breadcrumbs/breadcrumbs.component';
 import { SharedModule } from './shared/shared.module';
+import { ENVIRONMENT } from './core/services/environment.service';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,9 +30,9 @@ import { SharedModule } from './shared/shared.module';
     CarsModule,
     BrandsModule,
     BreadcrumbModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: ENVIRONMENT, useValue: environment }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

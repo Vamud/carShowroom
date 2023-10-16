@@ -7,6 +7,7 @@ import { CarsService } from '../cars.service';
 import { CarNode } from '../cars.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { LanguageService } from 'src/app/core/services/language.service';
+import { EnvironmentService } from 'src/app/core/services/environment.service';
 
 @Component({
   selector: 'app-car-details',
@@ -14,7 +15,7 @@ import { LanguageService } from 'src/app/core/services/language.service';
   styleUrls: ['./car-details.component.css'],
 })
 export class CarDetailsComponent {
-  baseUrl = this.service.baseUrl;
+  baseApiUrl: string;
   car$: Observable<CarNode> | undefined;
   settings$ = this.backendService
     .fetchSettings()
@@ -26,8 +27,11 @@ export class CarDetailsComponent {
     private backendService: BackendService,
     private service: CarsService,
     private location: Location,
-    private languageService: LanguageService
-  ) {}
+    private languageService: LanguageService,
+    private environmentService: EnvironmentService
+  ) {
+    this.baseApiUrl = this.environmentService.getValue('baseApiUrl');
+  }
 
   goBack(): void {
     this.location.back();

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { BackendService } from 'src/app/core/services/backend.service';
+import { EnvironmentService } from 'src/app/core/services/environment.service';
 import { LanguageService } from 'src/app/core/services/language.service';
-import { BASE_URL } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,15 @@ import { BASE_URL } from 'src/environments/environment';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  baseUrl = BASE_URL;
+  baseApiUrl: string;
   homeNode = this.backendService.fetchHomeNode();
   dictionary$ = this.languageService.fetchTranslation();
 
-  constructor(private backendService: BackendService, private languageService: LanguageService) {}
+  constructor(
+    private backendService: BackendService, 
+    private languageService: LanguageService,
+    private environmentService: EnvironmentService) {
+      this.baseApiUrl = this.environmentService.getValue('baseApiUrl');
+    }
 
 }

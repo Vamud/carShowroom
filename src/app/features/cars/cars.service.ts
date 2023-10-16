@@ -2,22 +2,32 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 
-import { BASE_URL, DELIVERY_API_URL } from 'src/environments/environment';
 import { CarNode, FilterOptions, FilteredCarsModel } from './cars.model';
 import { LanguageService } from 'src/app/core/services/language.service';
+import { EnvironmentService } from 'src/app/core/services/environment.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarsService {
-  baseUrl = BASE_URL;
+  baseApiUrl: string;
+  deliveryApiUrl: string;
 
   constructor(
     private http: HttpClient,
-    private languageService: LanguageService
-  ) {}
+    private languageService: LanguageService,
+    private environmentService: EnvironmentService
+  ) {
+    this.baseApiUrl = this.environmentService.getValue('baseApiUrl');
+    this.deliveryApiUrl = this.environmentService.getValue('deliveryApiUrl');
+  }
 
-  fetchCars(page: number, brand?: string, minPrice?: string, maxPrice?: string) : Observable<FilteredCarsModel> {
+  fetchCars(
+    page: number,
+    brand?: string,
+    minPrice?: string,
+    maxPrice?: string
+  ): Observable<FilteredCarsModel> {
     let params = new HttpParams().set('page', page);
 
     if (brand && brand !== 'null') {
@@ -34,7 +44,7 @@ export class CarsService {
 
     return this.languageService.languageObservable$.pipe(
       switchMap((language: string) => {
-        return this.http.get<FilteredCarsModel>(BASE_URL + '/content', {
+        return this.http.get<FilteredCarsModel>(this.baseApiUrl + '/content', {
           headers: { 'Accept-Language': language },
           params: params,
         });
@@ -43,13 +53,13 @@ export class CarsService {
   }
 
   fetchFilterOptions(): Observable<FilterOptions> {
-    return this.http.get<FilterOptions>(BASE_URL + '/content?page=1', {
+    return this.http.get<FilterOptions>(this.baseApiUrl + '/content?page=1', {
       headers: { 'Accept-Language': 'en-US' },
     });
   }
 
   fetchCar(carId: string): Observable<CarNode> {
-    const url = `${DELIVERY_API_URL}/item/${carId}`;
+    const url = `${this.deliveryApiUrl}/item/${carId}`;
 
     return this.languageService.languageObservable$.pipe(
       switchMap((language: string) => {
