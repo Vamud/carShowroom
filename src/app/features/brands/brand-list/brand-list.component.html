@@ -1,22 +1,21 @@
 <div class="container">
-    <div *ngIf="brands$ | async; else loadingBlock" class="col">
-        <div *ngFor="let brand of brands$ | async" class="card mb-3">
+    <div *ngIf="brands$ | async as brands; else loadingBlock" class="col">
+        <div *ngFor="let brand of brands" class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-3 p-3">
                     <img [src]="baseUrl + brand.properties.icon[0].url" class="img-fluid rounded-start"
                         alt="Car brand logo" style="width:200px;height:200px">
                 </div>
                 <div class="col-md-9">
-                    <div *ngIf="settings$ |async as settings" class="card-body">
+                    <div *ngIf="settings" class="card-body">
                         <div class="row justify-content-between">
                             <h5 class="card-title">{{ brand.name }}</h5>
                         </div>
                         <div [innerHTML]="brand.properties.description.markup" class="card-text"></div>
                         <div class="row">
                             <div class="col-1">
-                                <img *ngIf="settings" [src]="baseUrl + settings.originCountryIcon[0].url"
-                                    class="rounded float-start" alt="Origin Country Icon"
-                                    style="width:20px;height:20px" />
+                                <img *ngIf="settings" [src]="baseUrl + settings.originCountryIcon[0].url" class="rounded float-start"
+                                    alt="Origin Country Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">
                                 <span class="text-black">{{ brand.properties.originCountry }}</span>
@@ -24,9 +23,8 @@
                         </div>
                         <div class="row">
                             <div class="col-1">
-                                <img *ngIf="settings" [src]="baseUrl + settings.dateIcon[0].url"
-                                    class="rounded float-start" alt="Origin Country Icon"
-                                    style="width:20px;height:20px" />
+                                <img *ngIf="settings" [src]="baseUrl + settings.dateIcon[0].url" class="rounded float-start"
+                                    alt="Origin Country Icon" style="width:20px;height:20px" />
                             </div>
                             <div class="col">
                                 <span class="text-black">{{ brand.properties.foundationDate.slice(0, 4) }}</span>
@@ -35,8 +33,11 @@
                         <div class="row align-items-cente mt-3">
                             <div class="col">
                                 <a (click)="goBack()" class="btn btn-outline-secondary me-2" type="button">
-                                    goBack </a>
-                                <a routerLink="/cars" class="btn btn-outline-secondary me-2">View Models</a>
+                                    {{(dictionary$ | async) | translation:'Go back'}}
+                                </a>
+                                <a routerLink="/cars" class="btn btn-outline-secondary me-2">
+                                    {{(dictionary$ | async) | translation:'View models'}}
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -1,31 +1,39 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { LanguageService } from 'src/app/core/services/language.service';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnChanges {
   @Input() currentPage!: number;
   @Input() totalPages!: number;
   @Output() pageChanged = new EventEmitter<number>();
-  
+  dictionary$ = this.languageService.fetchTranslation();
+
   pages: number[] = [];
 
-  ngOnInit(): void {
-    for (let i = 1; i < this.totalPages + 1; i++){
-      this.pages.push(i);
+  constructor(private languageService: LanguageService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['totalPages']) {
+      const temp: number[] = [];
+      for (let i = 1; i < this.totalPages + 1; i++) {
+        temp.push(i);
+      }
+      this.pages = temp;
     }
   }
 
   previousPage() {
-    if (this.currentPage > 1){
+    if (this.currentPage > 1) {
       this.pageChanged.emit(this.currentPage - 1);
     }
   }
 
   nextPage() {
-    if (this.currentPage < this.totalPages){
+    if (this.currentPage < this.totalPages) {
       this.pageChanged.emit(this.currentPage + 1);
     }
   }

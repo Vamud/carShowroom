@@ -5,7 +5,9 @@
                 <li [hidden]="currentPage < 2" class="page-item">
                     <a class="page-link" (click)="previousPage()" type="button" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">previous</span>
+                        <span class="sr-only">
+                            {{(dictionary$ | async) | translation:'Previous'}}
+                        </span>
                     </a>
                 </li>
                 <li *ngFor="let page of pages" class="page-item">
@@ -14,7 +16,9 @@
                 <li [hidden]="currentPage >= totalPages" class="page-item">
                     <a class="page-link" (click)="nextPage()" type="button" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">next</span>
+                        <span class="sr-only">
+                            {{(dictionary$ | async) | translation:'Next'}}
+                        </span>
                     </a>
                 </li>
             </ul>

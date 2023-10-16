@@ -1,13 +1,21 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Properties } from '../../models/settings.model';
+import { SettingsProperties } from '../../models/settings.model';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  @Input() settings: Observable<Properties> | undefined;
+  @Input() settings: Observable<SettingsProperties> | undefined;
+  dictionary$ = this.languageService.fetchTranslation();
+
+  constructor(private languageService: LanguageService) {}
+
+  languageSwitch(lan: string) {
+    this.languageService.setLanguage(lan);
+  }
 }

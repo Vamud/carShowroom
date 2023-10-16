@@ -1,10 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-2 p-4">
-            <h5>searchBarTitle</h5>
-            <form *ngIf="filterOptions | async as filterOptions" [formGroup]="filterForm" class="pt-4"
+            <h5>{{(dictionary$ | async) | translation:'Search bar'}}</h5>
+            <form *ngIf="filterOptions" [formGroup]="filterForm" class="pt-4"
                 (change)="applyFilters()">
-                <label for="brand-select">brandsTitle</label>
+                <label for="brand-select">
+                    {{(dictionary$ | async) | translation:'Brand'}}
+                </label>
                 <div class="row">
                     <select id="brand-select" formControlName="brand" class="form-select">
                         <option *ngFor="let brand of filterOptions.brandOptions" [value]="brand.id">
@@ -12,13 +14,24 @@
                         </option>
                     </select>
                 </div>
+                <label for="minPrice-select">
+                    {{(dictionary$ | async) | translation:'Price'}}
+                </label>
+                <div class="row">
+                    <select id="minPrice-select" formControlName="minPrice" class="form-select">
+                        <option *ngFor="let price of filterOptions.priceOptions" [value]="price.minPrice">
+                            {{ price.textMinPrice }}
+                        </option>
+                    </select>
+                    <select id="maxPrice-select" formControlName="maxPrice" class="form-select">
+                        <option *ngFor="let price of filterOptions.priceOptions" [value]="price.maxPrice">
+                            {{ price.textMaxPrice }}
+                        </option>
+                    </select>
+                </div>
             </form>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-10">
-            <ng-container *ngIf="filterOptions | async as filterOptions">
-                <app-pagination *ngIf="totalPages > 1" [currentPage]="currentPage"
-                    [totalPages]="totalPages" (pageChanged)="pageChanged($event)"></app-pagination>
-            </ng-container>
             <div *ngIf="cars$ | async as cars; else loadingBlock" class="row row-cols-1 row-cols-md-3 g-4">
                 <div *ngFor="let car of cars" class="col-md-6 col-lg-6 col-xl-4">
                     <div class="card">
@@ -67,37 +80,19 @@
                             <div *ngIf="car.discount > 0; else elsePriceBlock" class="row">
                                 <div class="col text-success">
                                     <h5 class="text-danger text-decoration-line-through">
-                                        {{
-                                        car.price.toLocaleString("en-US", {
-                                        style: "currency",
-                                        currency: "USD"
-                                        })
-                                        }}
+                                        {{ car.price | price }}
                                     </h5>
                                 </div>
                                 <div class="col text-success">
                                     <h5>
-                                        {{
-                                        priceWithDiscount(car.price, car.discount).toLocaleString(
-                                        "en-US",
-                                        {
-                                        style: "currency",
-                                        currency: "USD"
-                                        }
-                                        )
-                                        }}
+                                        {{car.price | discountPrice:car.discount}}
                                     </h5>
                                 </div>
                             </div>
                             <ng-template #elsePriceBlock>
                                 <div class="row">
                                     <h5 class="text-success">
-                                        {{
-                                        car.price.toLocaleString("en-US", {
-                                        style: "currency",
-                                        currency: "USD"
-                                        })
-                                        }}
+                                        {{ car.price | price }}
                                     </h5>
                                 </div>
                             </ng-template>
@@ -112,9 +107,9 @@
                     </div>
                 </div>
             </ng-template>
-            <ng-container *ngIf="filterOptions | async as filterOptions">
-                <app-pagination *ngIf="filterOptions.totalPages > 1" [currentPage]="currentPage"
-                    [totalPages]="filterOptions.totalPages" (pageChanged)="pageChanged($event)"></app-pagination>
+            <ng-container *ngIf="totalPages$ | async as totalPages">
+                <app-pagination *ngIf="totalPages > 1 && (currentPage$ | async) as current" [currentPage]="current"
+                    [totalPages]="totalPages" (pageChanged)="pageChanged($event)"></app-pagination>
             </ng-container>
         </div>
     </div>

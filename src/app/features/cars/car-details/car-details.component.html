@@ -13,26 +13,16 @@
                         <div *ngIf="car.properties.discount > 0; else withoutDiscount" class="row">
                             <div class="col">
                                 <h5 class="text-danger text-decoration-line-through">
-                                    {{ car.properties.price.toLocaleString('en-US', {
-                                    style: 'currency',
-                                    currency: 'USD'
-                                    }) }}
+                                    {{ car.properties.price | price}}
                                 </h5>
                                 <h5 class="text-success">
-                                    {{ priceWithDiscount(car.properties.price,
-                                    car.properties.discount).toLocaleString('en-US', {
-                                    style: 'currency',
-                                    currency: 'USD'
-                                    }) }}
+                                    {{ car.properties.price | discountPrice:car.properties.discount}}
                                 </h5>
                             </div>
                         </div>
                         <ng-template #withoutDiscount>
                             <div class="row">
-                                <h5 class="text-success">{{ car.properties.price.toLocaleString('en-US', {
-                                    style: 'currency',
-                                    currency: 'USD'
-                                    }) }}</h5>
+                                <h5 class="text-success">{{ car.properties.price | price}}</h5>
                             </div>
                         </ng-template>
                         <div class="row">
@@ -68,8 +58,11 @@
                     <div class="row">
                         <div class="col">
                             <a (click)="goBack()" type="button" class="btn btn-outline-secondary me-2">
-                                goBack</a>
-                            <a class="btn btn-outline-secondary me-2">Buy</a>
+                                {{(dictionary$ | async) | translation:'Go back'}}
+                            </a>
+                            <a class="btn btn-outline-secondary me-2">
+                                {{(dictionary$ | async) | translation:'Buy'}}
+                            </a>
                         </div>
                     </div>
                 </div>

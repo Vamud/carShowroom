@@ -7,7 +7,7 @@
     </div>
     <div class="row-4 text-center m-4">
         <a routerLink="/cars" class="btn btn-outline-secondary">
-            Cars
+            {{(dictionary$ | async) | translation:'Cars'}}
         </a>
     </div>
     <div [innerHTML]="homeNode.about.markup" class="row p-4"></div>

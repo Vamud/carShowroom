@@ -3,7 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrandListComponent } from './brand-list/brand-list.component';
 
 const routes: Routes = [
-  { path: 'brands', component: BrandListComponent }
+  { 
+    path: '',
+    data: {
+      breadcrumb: 'Brands'
+    },
+    children: [
+      {
+        path: '',
+        data: {
+          breadcrumb: null
+        },
+        component: BrandListComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({

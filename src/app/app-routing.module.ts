@@ -3,16 +3,36 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'cars',
-    loadChildren: () => 
-      import('src/app/features/cars/cars-routing.module').then(
-        (m) => m.CarsRoutingModule
-      )
-  }
+    path: '',
+    children: [
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('src/app/features/home/home-routing.module').then(
+            (m) => m.HomeRoutingModule
+          ),
+      },
+      {
+        path: 'brands',
+        loadChildren: () =>
+          import('src/app/features/brands/brands-routing.module').then(
+            (m) => m.BrandsRoutingModule
+          ),
+      },
+      {
+        path: 'cars',
+        loadChildren: () =>
+          import('src/app/features/cars/cars-routing.module').then(
+            (m) => m.CarsRoutingModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
