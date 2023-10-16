@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, mergeMap, switchMap } from 'rxjs';
+import { Observable, map, mergeMap, switchMap } from 'rxjs';
 
 import { SettingsNode } from '../models/settings.model';
-import { HomeNode } from '../models/home.model';
+import { HomeNode, HomeNodeProperties } from '../models/home.model';
 import { DELIVERY_API_URL } from 'src/environments/environment';
 import { LanguageService } from './language.service';
 
@@ -16,7 +16,7 @@ export class BackendService {
     private languageService: LanguageService
   ) {}
 
-  fetchSettings() {
+  fetchSettings(): Observable<SettingsNode> {
     return this.languageService.languageObservable$.pipe(
       mergeMap((language: string) => {
         return this.http.get<SettingsNode>(
@@ -27,7 +27,7 @@ export class BackendService {
     );
   }
 
-  fetchHomeNode() {
+  fetchHomeNode(): Observable<HomeNodeProperties> {
     return this.languageService.languageObservable$.pipe(
       switchMap((language: string) => {
         return this.http

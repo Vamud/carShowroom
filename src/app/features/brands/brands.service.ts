@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BrandNode } from './brands.model';
+import { Observable, switchMap } from 'rxjs';
+
 import { DELIVERY_API_URL } from 'src/environments/environment';
 import { BrandNodeInterface } from 'src/app/features/brands/types/brandNode.interface';
 import { LanguageService } from 'src/app/core/services/language.service';
-import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class BrandsService {
 
   constructor(private http: HttpClient, private languageService: LanguageService) { }
 
-  fetchBrands() {
+  fetchBrands(): Observable<BrandNodeInterface> {
     return this.languageService.languageObservable$.pipe(
       switchMap((language: string) => {
         return this.http.get<BrandNodeInterface>(

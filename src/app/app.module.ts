@@ -11,7 +11,6 @@ import { HomeModule } from './features/home/home.module';
 import { CarsModule } from './features/cars/cars.module';
 import { BrandsModule } from './features/brands/brands.module';
 import { BreadcrumbsComponent } from './core/layout/breadcrumbs/breadcrumbs.component';
-import { TranslationPipe } from './shared/ui/pipes/dictionary/translation.pipe';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({

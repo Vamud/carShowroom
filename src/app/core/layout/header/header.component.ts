@@ -15,7 +15,7 @@ export class HeaderComponent {
 
   constructor(private languageService: LanguageService) {}
 
-  languageSwitch(lan: string) {
+  languageSwitch(lan: string): void {
     this.languageService.setLanguage(lan);
   }
 }

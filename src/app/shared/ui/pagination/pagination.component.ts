@@ -26,19 +26,19 @@ export class PaginationComponent implements OnChanges {
     }
   }
 
-  previousPage() {
+  previousPage(): void {
     if (this.currentPage > 1) {
       this.pageChanged.emit(this.currentPage - 1);
     }
   }
 
-  nextPage() {
+  nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.pageChanged.emit(this.currentPage + 1);
     }
   }
 
-  selectPage(page: number) {
+  selectPage(page: number): void {
     this.pageChanged.emit(page);
   }
 }

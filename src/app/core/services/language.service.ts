@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+
 import { DictionaryItem } from '../models/dictionary.model';
 import { BASE_URL } from 'src/environments/environment';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class LanguageService {
 
   constructor(private http: HttpClient) {}
 
-  fetchTranslation() {
+  fetchTranslation(): Observable<DictionaryItem[]> {
     return this.languageObservable$.pipe(
       switchMap((language: string) => {
         return this.http.get<DictionaryItem[]>(
@@ -24,7 +25,7 @@ export class LanguageService {
     );
   }
 
-  setLanguage(newLanguage: string) {
+  setLanguage(newLanguage: string): void {
     this.language$.next(newLanguage);
   }
 }

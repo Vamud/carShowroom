@@ -29,7 +29,7 @@ export class CarDetailsComponent {
     private languageService: LanguageService
   ) {}
 
-  goBack() {
+  goBack(): void {
     this.location.back();
   }
 

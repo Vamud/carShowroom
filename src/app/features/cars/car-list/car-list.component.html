@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-2 p-4">
             <h5>{{(dictionary$ | async) | translation:'Search bar'}}</h5>
-            <form *ngIf="filterOptions" [formGroup]="filterForm" class="pt-4"
-                (change)="applyFilters()">
+            <form *ngIf="filterOptions" [formGroup]="filterForm" class="pt-4">
                 <label for="brand-select">
                     {{(dictionary$ | async) | translation:'Brand'}}
                 </label>
@@ -30,6 +29,11 @@
                     </select>
                 </div>
             </form>
+            <div class="row mt-2">
+                <button (click)="clearFilters()" class="btn btn-outline-secondary">
+                    {{(dictionary$ | async) | translation:'RemoveFilters'}}
+                </button>
+            </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-10">
             <div *ngIf="cars$ | async as cars; else loadingBlock" class="row row-cols-1 row-cols-md-3 g-4">
@@ -98,6 +102,9 @@
                             </ng-template>
                         </div>
                     </div>
+                </div>
+                <div *ngIf="cars.length === 0" class="alert alert-light" role="alert">
+                    No cars matching the selected criteria were found.
                 </div>
             </div>
             <ng-template #loadingBlock>

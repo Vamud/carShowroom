@@ -20,7 +20,7 @@ const routes: Routes = [
       {
         path: ':id',
         data: {
-          breadcrumb: 'Car Details'
+          breadcrumb: 'CarDetails'
         },
         component: CarDetailsComponent
       }

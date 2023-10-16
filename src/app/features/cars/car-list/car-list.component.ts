@@ -40,9 +40,11 @@ export class CarListComponent {
     private languageService: LanguageService
   ) {}
 
-  applyFilters() {}
+  clearFilters(): void {
+    this.filterForm.reset();
+  }
 
-  pageChanged(newPage: number) {
+  pageChanged(newPage: number): void {
     this.currentPage$.next(newPage);
     this.renderer.setProperty(document.documentElement, 'scrollTop', 0);
   }

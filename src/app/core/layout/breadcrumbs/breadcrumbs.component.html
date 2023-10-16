@@ -1,2 +1,18 @@
-<p-breadcrumb [home]="home" [model]="menuItems"></p-breadcrumb>
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">
+            {{(dictionary$ | async) | translation: home.label!}}
+            </a>
+        </li>
+        <ng-container *ngFor="let item of menuItems; let last = last">
+            <li class="breadcrumb-item" *ngIf="!last">
+                <a [routerLink]="[item.routerLink]">
+                    {{(dictionary$ | async) | translation: item.label!}}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" *ngIf="last" aria-current="page">
+                {{(dictionary$ | async) | translation: item.label!}}
+            </li>
+        </ng-container>
+    </ol>
+</nav>

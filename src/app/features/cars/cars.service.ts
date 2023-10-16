@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 import { BASE_URL, DELIVERY_API_URL } from 'src/environments/environment';
 import { CarNode, FilterOptions, FilteredCarsModel } from './cars.model';
@@ -17,7 +17,7 @@ export class CarsService {
     private languageService: LanguageService
   ) {}
 
-  fetchCars(page: number, brand?: string, minPrice?: string, maxPrice?: string) {
+  fetchCars(page: number, brand?: string, minPrice?: string, maxPrice?: string) : Observable<FilteredCarsModel> {
     let params = new HttpParams().set('page', page);
 
     if (brand && brand !== 'null') {
@@ -42,13 +42,13 @@ export class CarsService {
     );
   }
 
-  fetchFilterOptions() {
+  fetchFilterOptions(): Observable<FilterOptions> {
     return this.http.get<FilterOptions>(BASE_URL + '/content?page=1', {
       headers: { 'Accept-Language': 'en-US' },
     });
   }
 
-  fetchCar(carId: string) {
+  fetchCar(carId: string): Observable<CarNode> {
     const url = `${DELIVERY_API_URL}/item/${carId}`;
 
     return this.languageService.languageObservable$.pipe(
