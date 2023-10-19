@@ -2,13 +2,13 @@ import { Component, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { map, Observable, BehaviorSubject, tap, combineLatest, switchMap, startWith } from 'rxjs';
 
-import { SettingsNode } from 'src/app/core/models/settings.model';
-import { CarModel, FilterOptions } from 'src/app/features/cars/cars.model';
-import { CarsService } from 'src/app/features/cars/cars.service';
-import { BackendService } from 'src/app/core/services/backend.service';
-import { LanguageService } from 'src/app/core/services/language.service';
-import { EnvironmentService } from 'src/app/core/services/environment.service';
-import { AuthService } from '../../auth/auth.service';
+import { SettingsNode } from '@app/models/settings.model';
+import { CarModel, FilterOptions } from '@features/cars/cars.model';
+import { CarsService } from '@features/cars/cars.service';
+import { BackendService } from '@app/services/backend.service';
+import { LanguageService } from '@app/services/language.service';
+import { EnvironmentService } from '@app/services/environment.service';
+import { AuthService } from '@features/auth/auth.service';
 
 @Component({
   selector: 'app-car-list',

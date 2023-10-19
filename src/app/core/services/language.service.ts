@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
-import { DictionaryItem } from '../models/dictionary.model';
-import { EnvironmentService } from './environment.service';
+import { DictionaryItem } from '@app/models/dictionary.model';
+import { EnvironmentService } from '@app/services/environment.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs';
 
-import { BackendService } from './core/services/backend.service';
-import { SettingsNode } from './core/models/settings.model';
+import { BackendService } from '@app/services/backend.service';
+import { SettingsNode } from '@app/models/settings.model';
 
 @Component({
   selector: 'app-root',

@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
-import { EnvironmentService } from 'src/app/core/services/environment.service';
+import { EnvironmentService } from '@app/services/environment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class AuthService {
     }
   }
 
-  logIn(email: string | undefined | null, password: string | undefined | null) {
+  logIn(email: string, password: string) {
     this.http
       .post(this.baseApiUrl + '/login', {
         email: email,
@@ -56,9 +56,9 @@ export class AuthService {
   }
 
   sighIn(
-    name: string | undefined | null,
-    email: string | undefined | null,
-    password: string | undefined | null
+    name: string,
+    email: string,
+    password: string
   ) {
     this.http
       .post(this.baseApiUrl + '/register', {

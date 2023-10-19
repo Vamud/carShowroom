@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, mergeMap, switchMap } from 'rxjs';
 
-import { SettingsNode } from '../models/settings.model';
-import { HomeNode, HomeNodeProperties } from '../models/home.model';
-import { LanguageService } from './language.service';
-import { EnvironmentService } from './environment.service';
+import { SettingsNode } from '@app/models/settings.model';
+import { HomeNode, HomeNodeProperties } from '@app/models/home.model';
+import { LanguageService } from '@app/services/language.service';
+import { EnvironmentService } from '@app/services/environment.service';
 
 @Injectable({
   providedIn: 'root',

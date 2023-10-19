@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { BackendService } from 'src/app/core/services/backend.service';
-import { EnvironmentService } from 'src/app/core/services/environment.service';
-import { LanguageService } from 'src/app/core/services/language.service';
+import { BackendService } from '@app/services/backend.service';
+import { EnvironmentService } from '@app/services/environment.service';
+import { LanguageService } from '@app/services/language.service';
 
 @Component({
   selector: 'app-home',

@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { LanguageService } from 'src/app/core/services/language.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+
+import { LanguageService } from '@app/services/language.service';
 
 @Component({
   selector: 'app-pagination',

@@ -15,7 +15,7 @@
                 {{(dictionary$ | async) | translation:'Password'}}
             </label>
         </div>
-        <button (click)="logIn()" class="btn btn-outline-secondary w-100 py-2" type="button">
+        <button (click)="logIn()" [disabled]="loginForm.invalid" class="btn btn-outline-secondary w-100 py-2" type="button">
             {{(dictionary$ | async) | translation:'LogIn'}}
         </button>
         <div *ngIf="errorMessage$ | async as message">{{ message }}</div>

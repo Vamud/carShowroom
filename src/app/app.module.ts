@@ -5,16 +5,16 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './core/layout/header/header.component';
-import { FooterComponent } from './core/layout/footer/footer.component';
-import { HomeModule } from './features/home/home.module';
-import { CarsModule } from './features/cars/cars.module';
-import { BrandsModule } from './features/brands/brands.module';
-import { BreadcrumbsComponent } from './core/layout/breadcrumbs/breadcrumbs.component';
-import { SharedModule } from './shared/shared.module';
-import { ENVIRONMENT } from './core/services/environment.service';
-import { environment } from 'src/environments/environment';
-import { AuthModule } from './features/auth/auth.module';
+import { HeaderComponent } from '@app/layout/header/header.component';
+import { FooterComponent } from '@app/layout/footer/footer.component';
+import { HomeModule } from '@features/home/home.module';
+import { CarsModule } from '@features/cars/cars.module';
+import { BrandsModule } from '@features/brands/brands.module';
+import { BreadcrumbsComponent } from '@app/layout/breadcrumbs/breadcrumbs.component';
+import { SharedModule } from '@shared/shared.module';
+import { ENVIRONMENT } from '@app/services/environment.service';
+import { environment } from '@env';
+import { AuthModule } from '@features/auth/auth.module';
 
 @NgModule({
   declarations: [

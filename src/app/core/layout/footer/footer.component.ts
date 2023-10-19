@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { HomeNodeProperties } from '../../models/home.model';
 import { Observable } from 'rxjs';
+
+import { HomeNodeProperties } from '@app/models/home.model';
 
 @Component({
   selector: 'app-footer',

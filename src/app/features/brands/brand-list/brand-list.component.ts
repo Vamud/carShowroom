@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { Location } from '@angular/common';
 
-import { BackendService } from 'src/app/core/services/backend.service';
-import { BrandsService } from '../brands.service';
+import { BackendService } from '@app/services/backend.service';
+import { BrandsService } from '@features/brands/brands.service';
 import {
   SettingsNode,
   SettingsProperties,
-} from 'src/app/core/models/settings.model';
-import { BrandNodeInterface } from '../types/brandNode.interface';
-import { LanguageService } from 'src/app/core/services/language.service';
-import { EnvironmentService } from 'src/app/core/services/environment.service';
+} from '@app/models/settings.model';
+import { BrandNodeInterface } from '@features/brands/types/brandNode.interface';
+import { LanguageService } from '@app/services/language.service';
+import { EnvironmentService } from '@app/services/environment.service';
 
 @Component({
   selector: 'app-brand-list',

@@ -23,7 +23,7 @@
                 {{(dictionary$ | async) | translation:'Password'}}
             </label>
         </div>
-        <button (click)="singIn()" class="btn btn-outline-secondary w-100 py-2" type="button">
+        <button (click)="singIn()" [disabled]="signInForm.invalid" class="btn btn-outline-secondary w-100 py-2" type="button">
             {{(dictionary$ | async) | translation:'SignUp'}}
         </button>
         <div *ngIf="errorMessage$ | async as message">{{ message }}</div>

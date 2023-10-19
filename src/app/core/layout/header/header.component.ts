@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { SettingsProperties } from '../../models/settings.model';
-import { LanguageService } from '../../services/language.service';
-import { AuthService } from 'src/app/features/auth/auth.service';
+import { SettingsProperties } from '@app/models/settings.model';
+import { LanguageService } from '@app/services/language.service';
+import { AuthService } from '@features/auth/auth.service';
 
 @Component({
   selector: 'app-header',

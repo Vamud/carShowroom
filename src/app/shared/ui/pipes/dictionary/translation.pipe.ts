@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DictionaryItem } from 'src/app/core/models/dictionary.model';
+
+import { DictionaryItem } from '@app/models/dictionary.model';
 
 @Pipe({
   name: 'translation'

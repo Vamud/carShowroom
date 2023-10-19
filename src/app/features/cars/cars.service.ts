@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 
-import { CarNode, FilterOptions, FilteredCarsModel } from './cars.model';
-import { LanguageService } from 'src/app/core/services/language.service';
-import { EnvironmentService } from 'src/app/core/services/environment.service';
+import { CarNode, FilterOptions, FilteredCarsModel } from '@features/cars/cars.model';
+import { LanguageService } from '@app/services/language.service';
+import { EnvironmentService } from '@app/services/environment.service';
 
 @Injectable({
   providedIn: 'root',

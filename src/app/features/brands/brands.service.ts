@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 
-import { BrandNodeInterface } from 'src/app/features/brands/types/brandNode.interface';
-import { LanguageService } from 'src/app/core/services/language.service';
-import { EnvironmentService } from 'src/app/core/services/environment.service';
+import { BrandNodeInterface } from '@features/brands/types/brandNode.interface';
+import { LanguageService } from '@app/services/language.service';
+import { EnvironmentService } from '@app/services/environment.service';
 
 @Injectable({
   providedIn: 'root'

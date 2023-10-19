@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { SharedModule } from "../../shared/shared.module";
-import { LanguageService } from 'src/app/core/services/language.service';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { AuthRoutingModule } from '@features/auth/auth-routing.module';
+import { LoginComponent } from '@features/auth/login/login.component';
+import { RegisterComponent } from '@features/auth/register/register.component';
+import { SharedModule } from "@shared/shared.module";
 
 
 @NgModule({

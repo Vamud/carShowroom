@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslationPipe } from './ui/pipes/dictionary/translation.pipe';
+
+import { TranslationPipe } from '@shared/ui/pipes/dictionary/translation.pipe';
 
 
 
