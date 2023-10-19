@@ -1,0 +1,31 @@
+<main class="form-signin w-100 m-auto">
+    <form [formGroup]="signInForm">
+        <h1 class="h3 mb-3 fw-normal">
+            {{(dictionary$ | async) | translation:'SignUp'}}
+        </h1>
+        <div class="form-floating">
+            <input formControlName="name" type="text" class="form-control" id="floatingName" placeholder="Alice">
+            <label for="floatingName">
+                {{(dictionary$ | async) | translation:'Name'}}
+            </label>
+        </div>
+        <div class="form-floating">
+            <input formControlName="email" type="email" class="form-control" id="floatingInput"
+                placeholder="name@example.com">
+            <label for="floatingInput">
+                {{(dictionary$ | async) | translation:'EmailAddress'}}
+            </label>
+        </div>
+        <div class="form-floating">
+            <input formControlName="password" type="password" class="form-control" id="floatingPassword"
+                placeholder="Password">
+            <label for="floatingPassword">
+                {{(dictionary$ | async) | translation:'Password'}}
+            </label>
+        </div>
+        <button (click)="singIn()" class="btn btn-outline-secondary w-100 py-2" type="button">
+            {{(dictionary$ | async) | translation:'SignUp'}}
+        </button>
+        <div *ngIf="errorMessage$ | async as message">{{ message }}</div>
+    </form>
+</main>

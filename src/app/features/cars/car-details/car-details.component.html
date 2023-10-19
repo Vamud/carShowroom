@@ -10,7 +10,7 @@
                         <div class="col">
                             <h5 class="card-title">{{ car.name }}</h5>
                         </div>
-                        <div *ngIf="car.properties.discount > 0; else withoutDiscount" class="row">
+                        <div *ngIf="car.properties.discount > 0 && (isAuth$ | async); else withoutDiscount" class="row">
                             <div class="col">
                                 <h5 class="text-danger text-decoration-line-through">
                                     {{ car.properties.price | price}}
@@ -60,7 +60,7 @@
                             <a (click)="goBack()" type="button" class="btn btn-outline-secondary me-2">
                                 {{(dictionary$ | async) | translation:'Go back'}}
                             </a>
-                            <a class="btn btn-outline-secondary me-2">
+                            <a *ngIf="isAuth$ | async" class="btn btn-outline-secondary me-2">
                                 {{(dictionary$ | async) | translation:'Buy'}}
                             </a>
                         </div>

@@ -19,7 +19,6 @@ export class BackendService {
     private enviromentService: EnvironmentService
   ) {
     this.devileryApiUrl = this.enviromentService.getValue('deliveryApiUrl');
-    console.log(this.devileryApiUrl);
   }
 
   fetchSettings(): Observable<SettingsNode> {

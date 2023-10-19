@@ -81,7 +81,7 @@
                                     <span class="text-body-secondary">{{ car.location }}</span>
                                 </div>
                             </div>
-                            <div *ngIf="car.discount > 0; else elsePriceBlock" class="row">
+                            <div *ngIf="car.discount > 0 && (isAuth$ | async); else elsePriceBlock" class="row">
                                 <div class="col text-success">
                                     <h5 class="text-danger text-decoration-line-through">
                                         {{ car.price | price }}

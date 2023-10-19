@@ -8,6 +8,7 @@ import { CarsService } from 'src/app/features/cars/cars.service';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { EnvironmentService } from 'src/app/core/services/environment.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-car-list',
@@ -16,6 +17,7 @@ import { EnvironmentService } from 'src/app/core/services/environment.service';
 })
 export class CarListComponent {
   baseApiUrl: string;
+  isAuth$ = this.authService.isAuth$;
 
   cars$!: Observable<CarModel[]>;
 
@@ -38,7 +40,8 @@ export class CarListComponent {
     private carsService: CarsService,
     private renderer: Renderer2,
     private languageService: LanguageService,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
+    private authService: AuthService
   ) {
     this.baseApiUrl = this.environmentService.getValue('baseApiUrl');
   }

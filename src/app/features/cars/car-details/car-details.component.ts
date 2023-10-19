@@ -8,6 +8,7 @@ import { CarNode } from '../cars.model';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { EnvironmentService } from 'src/app/core/services/environment.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-car-details',
@@ -16,6 +17,7 @@ import { EnvironmentService } from 'src/app/core/services/environment.service';
 })
 export class CarDetailsComponent {
   baseApiUrl: string;
+  isAuth$ = this.authService.isAuth$;
   car$: Observable<CarNode> | undefined;
   settings$ = this.backendService
     .fetchSettings()
@@ -28,7 +30,8 @@ export class CarDetailsComponent {
     private service: CarsService,
     private location: Location,
     private languageService: LanguageService,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
+    private authService: AuthService
   ) {
     this.baseApiUrl = this.environmentService.getValue('baseApiUrl');
   }

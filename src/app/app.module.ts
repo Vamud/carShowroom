@@ -14,6 +14,7 @@ import { BreadcrumbsComponent } from './core/layout/breadcrumbs/breadcrumbs.comp
 import { SharedModule } from './shared/shared.module';
 import { ENVIRONMENT } from './core/services/environment.service';
 import { environment } from 'src/environments/environment';
+import { AuthModule } from './features/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { environment } from 'src/environments/environment';
     BrandsModule,
     BreadcrumbModule,
     SharedModule,
+    AuthModule
   ],
   providers: [{ provide: ENVIRONMENT, useValue: environment }],
   bootstrap: [AppComponent],

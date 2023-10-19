@@ -22,6 +22,18 @@
                         </a>
                     </li>
                 </ul>
+                <ng-container *ngIf="isAuth$ | async">
+                    <div>{{userName$ | async}}</div>
+                    <button (click)="logOut()" class="btn btn-light m-2">
+                        {{(dictionary$ | async) | translation:'LogOut'}}
+                    </button>
+                </ng-container>
+                <a *ngIf="!(isAuth$ | async)" routerLink="/login" class="btn btn-light m-2">
+                    {{(dictionary$ | async) | translation:'LogIn'}}
+                </a>
+                <a *ngIf="!(isAuth$ | async)" routerLink="/register" class="btn btn-light m-2">
+                    {{(dictionary$ | async) | translation:'SignUp'}}
+                </a>
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle m-2" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
