@@ -14,8 +14,5 @@ export class AppComponent {
   settings = this.backendService.fetchSettings().pipe(map((data: SettingsNode) => data.properties));
 
   constructor(private backendService: BackendService) {}
-
-  
-
 }
 
